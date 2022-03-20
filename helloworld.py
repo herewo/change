@@ -1,3 +1,5 @@
+import os
+
 def test_create(name,msg):
   desktop_path = "D:\JenkinsTest"
   full_path = desktop_path + name + ".txt"
@@ -6,4 +8,5 @@ def test_create(name,msg):
   file.close()
   print("OK!!!!!!")
 
-test_create("hello","hello world")
+if __name__ == '__main__':
+  test_create("hello","hello world")
