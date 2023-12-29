@@ -13,20 +13,6 @@ pipeline {
         }
     }
     stages {
-        stage('1 - git update') {
-            steps { script{ dir("${workspace}") {
-                echo 'update Resource'
-                build job: 'Template.Git.Win',
-                parameters: [
-                    string(name: 'label_name', value: "${label_name}"),
-                    string(name: 'workspace', value: "${workspace}"),
-                    string(name: 'branch', value: "${res_branch}"),
-                    booleanParam(name: 'init_submodule', value: true),
-                    booleanParam(name: 'git_clean', value: false),
-                    booleanParam(name: 'git_sub_clean', value: true)
-                ]
-            }}}
-        }
         stage('2 - I18NResourceCheck') {
             steps { script{ dir("${workspace}") {
                 bat "del /f /q errorResourcesInfo.txt"
