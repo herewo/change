@@ -4,6 +4,7 @@ def workspace = "${project_path}/res_project"
 def log_dir = "${project_path}/build_logs/CheckI18NAssets"
 def unity_dir = 'C:\\Program Files\\Unity\\Hub\\Editor\\2021.3.30f1c1'
 def unity = "\"${unity_dir}\\Editor\\Unity.exe\""
+
 pipeline {
     agent {
         label {
@@ -24,23 +25,6 @@ pipeline {
                     booleanParam(name: 'git_clean', value: false),
                     booleanParam(name: 'git_sub_clean', value: true)
                 ]
-            }}}
-        }
-        stage('2 - I18NResourceCHeck') {
-            steps { script{ dir("${workspace}") {
-                bat "del /f /q errorResourcesInfo.txt"
-                try{
-                    bat "${unity} -projectPath ${workspace}/client -logFile ${log_dir}/${env.BUILD_NUMBER}_build_I18NResCheck_jenkins.log -buildTarget ${platform} -executeMethod BuildResource.CheckI18NAssets -dst_dir ${workspace} -batchmode -nographics -quit"
-                }
-                catch(exc)
-                {
-                    unstable("check error！！！")                
-                }
-            }}}
-        }
-        stage('3 - Feishu call') {
-            steps { script{ dir("${workspace}") {
-                bat "cd /d \"${project_path}\\send_msg\" && python FeishuRobot.py ${res_branch}"
             }}}
         }
     }
