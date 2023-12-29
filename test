@@ -1,15 +1,9 @@
-// https://wiki.in.ys4fun.com/pages/viewpage.action?pageId=92051660
-
 def platform = 'android'
-
 def label_name = 'JPUSa'
-
 def workspace = "${project_path}/res_project"
 def log_dir = "${project_path}/build_logs/CheckI18NAssets"
 def unity_dir = 'C:\\Program Files\\Unity\\Hub\\Editor\\2021.3.30f1c1'
 def unity = "\"${unity_dir}\\Editor\\Unity.exe\""
-
-
 pipeline {
     agent {
         label {
