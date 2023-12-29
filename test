@@ -1,0 +1,17 @@
+def label_name = 'JPUSa'
+def workspace = "${project_path}/res_project"
+pipeline {
+    agent {
+        label {
+            label "${label_name}"
+            customWorkspace "${workspace}"
+        }
+    }
+    stages {
+        stage('3 - Feishu call') {
+            steps { script{ dir("${workspace}") {
+                echo "ok11111"
+            }}}
+        }
+    }
+}
