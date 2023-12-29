@@ -13,7 +13,7 @@ pipeline {
         }
     }
     stages {
-        stage('2 - I18NResourceCHeck') {
+        stage('2 - I18NResourceCheck') {
             steps { script{ dir("${workspace}") {
                 bat "del /f /q errorResourcesInfo.txt"
                 try{
