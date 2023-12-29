@@ -24,5 +24,10 @@ pipeline {
                 }
             }}}
         }
+        stage('3 - Feishu call') {
+            steps { script{ dir("${workspace}") {
+                bat "cd /d \"${project_path}\\send_msg\" && python FeishuRobot.py ${res_branch}"
+            }}}
+        }
     }
 }
