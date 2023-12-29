@@ -9,7 +9,7 @@ pipeline {
     agent {
         label {
             label "${label_name}"
-            customWorkspace "${project_path}"
+            customWorkspace "${project_path}\Jenkins"
         }
     }
     stages {
