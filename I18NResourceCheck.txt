@@ -18,9 +18,9 @@ pipeline {
         }
     }
     stages {
-        stage('1 - git更新') {
+        stage('1 - git update') {
             steps { script{ dir("${workspace}") {
-                echo '更新资源'
+                echo 'update Resource'
                 build job: 'Template.Git.Win',
                 parameters: [
                     string(name: 'label_name', value: "${label_name}"),
@@ -32,20 +32,19 @@ pipeline {
                 ]
             }}}
         }
-        stage('2 - 外服资源规范性检测') {
+        stage('2 - I18NResourceCHeck') {
             steps { script{ dir("${workspace}") {
                 bat "del /f /q errorResourcesInfo.txt"
-                //运行检查I18资源方法
                 try{
                     bat "${unity} -projectPath ${workspace}/client -logFile ${log_dir}/${env.BUILD_NUMBER}_build_I18NResCheck_jenkins.log -buildTarget ${platform} -executeMethod BuildResource.CheckI18NAssets -dst_dir ${workspace} -batchmode -nographics -quit"
                 }
                 catch(exc)
                 {
-                    unstable("检查出现错误！！！")                
+                    unstable("check error！！！")                
                 }
             }}}
         }
-        stage('3 - 飞书通知') {
+        stage('3 - Feishu call') {
             steps { script{ dir("${workspace}") {
                 bat "cd /d \"${project_path}\\send_msg\" && python FeishuRobot.py ${res_branch}"
             }}}
