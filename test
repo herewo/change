@@ -13,16 +13,9 @@ pipeline {
         }
     }
     stages {
-        stage('2 - I18NResourceCHeck') {
+        stage('3 - Feishu call') {
             steps { script{ dir("${workspace}") {
-                bat "del /f /q errorResourcesInfo.txt"
-                try{
-                    bat "${unity} -projectPath ${workspace}/client -logFile ${log_dir}/${env.BUILD_NUMBER}_build_I18NResCheck_jenkins.log -buildTarget ${platform} -executeMethod BuildResource.CheckI18NAssets -dst_dir ${workspace} -batchmode -nographics -quit"
-                }
-                catch(exc)
-                {
-                    unstable("check error！！！")                
-                }
+                bat "cd /d \"${project_path}\\send_msg\" && python FeishuRobot.py ${res_branch}"
             }}}
         }
     }
